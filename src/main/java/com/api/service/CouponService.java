@@ -1,5 +1,6 @@
 package com.api.service;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,10 +14,10 @@ import com.api.models.ProductPrice;
 public class CouponService {
 
 	private List<String> bestProductsList = new ArrayList<String>();
-	private Integer totalAmount = 0;
+	private Double totalAmount = 0.00;
 
 	Logger logger = LoggerFactory.getLogger(CouponService.class);
-	
+
 	/**
 	 * Servicio que devuelve la lista de productos cuyo monto total sea el más
 	 * próximo a monto solicitado
@@ -32,20 +33,23 @@ public class CouponService {
 		List<ProductPrice> productList = new ArrayList<ProductPrice>();
 
 		request.getProducts().forEach(productId -> {
-			try {
-				// Se consulta el precio de cada producto recibido
-				Integer price = ApiUtils.getPriceForIdProduct(productId);
-				ProductPrice product = new ProductPrice(productId, price);
-				productList.add(product);
-			} catch (Exception e) {
-				logger.error(e.getMessage());
-			}
-		});
+					try {
+						// Se consulta el precio de cada producto recibido
+						Double price = ApiUtils.getPriceForIdProduct(productId);
+						ProductPrice product = new ProductPrice(productId, price);
+						productList.add(product);
+					} catch (Exception e) {
+						logger.error(e.getMessage());
+					}
+				});
 
-		getBestProductsList(productList, request.getAmount(), 0, new ArrayList<>(), 0);
+		getBestProductsList(productList, request.getAmount(), 0, new ArrayList<>(), 0.00);
 
 		response.setProducts(bestProductsList);
-		response.setTotalAmount(totalAmount);
+		
+		// Creo objeto DecimalFormat para que devuelva solo dos decimales
+		DecimalFormat df = new DecimalFormat("#.##");
+		response.setTotalAmount(Double.parseDouble(df.format(totalAmount)));
 
 		logger.info("CouponProductsResponse: " + response.toString());
 		return response;
@@ -60,11 +64,11 @@ public class CouponService {
 	 * @param auxProducts
 	 * @param sumPrices
 	 */
-	private void getBestProductsList(List<ProductPrice> products, Integer amount, Integer index,
-			List<String> auxProducts, Integer sumPrices) {
+	private void getBestProductsList(List<ProductPrice> products, Double amount, Integer index,
+			List<String> auxProducts, Double sumPrices) {
 
-		if (amount - sumPrices > 0 && sumPrices > totalAmount) {
-			// Se guarda la lista y el monto que sea más próximo al amount recibido 
+		if (amount - sumPrices >= 0 && sumPrices > totalAmount) {
+			// Se guarda la lista y el monto que sea más próximo al amount recibido
 			bestProductsList = new ArrayList<String>(auxProducts);
 			totalAmount = sumPrices;
 		}

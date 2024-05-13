@@ -9,13 +9,13 @@ public class CouponProductsResponse {
 	@JsonProperty("item_ids")
 	private List<String> products;
 	@JsonProperty("total")
-	private Integer totalAmount = 0;
+	private Double totalAmount = 0.00;
 
 	public CouponProductsResponse() {
 
 	}
 
-	public CouponProductsResponse(List<String> products, Integer totalAmount) {
+	public CouponProductsResponse(List<String> products, Double totalAmount) {
 		this.products = products;
 		this.totalAmount = totalAmount;
 	}
@@ -28,11 +28,11 @@ public class CouponProductsResponse {
 		this.products = products;
 	}
 
-	public Integer getTotalAmount() {
+	public Double getTotalAmount() {
 		return totalAmount;
 	}
 
-	public void setTotalAmount(Integer totalAmount) {
+	public void setTotalAmount(Double totalAmount) {
 		this.totalAmount = totalAmount;
 	}
 

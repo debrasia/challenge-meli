@@ -9,13 +9,13 @@ public class CouponProductsRequest {
 	@JsonProperty("item_ids")
 	private List<String> products;
 	@JsonProperty("amount")
-	private Integer amount = 0;
+	private Double amount = 0.00;
 
 	public CouponProductsRequest() {
 
 	}
 
-	public CouponProductsRequest(List<String> products, Integer amount) {
+	public CouponProductsRequest(List<String> products, Double amount) {
 		this.products = products;
 		this.amount = amount;
 	}
@@ -28,11 +28,11 @@ public class CouponProductsRequest {
 		this.products = products;
 	}
 
-	public Integer getAmount() {
+	public Double getAmount() {
 		return amount;
 	}
 
-	public void setAmount(Integer amount) {
+	public void setAmount(Double amount) {
 		this.amount = amount;
 	}
 

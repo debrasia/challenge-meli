@@ -72,7 +72,7 @@ public class ApiUtils {
 	 * @return price
 	 * @throws Exception
 	 */
-	public static Integer getPriceForIdProduct(String idProduct) throws Exception {
+	public static Double getPriceForIdProduct(String idProduct) throws Exception {
 
 		HttpClient client = HttpClient.newHttpClient();
 
@@ -102,7 +102,7 @@ public class ApiUtils {
 		}
 		// convierto la respuesta en un json, para luego conseguir el precio
 		JSONObject json = new JSONObject(response.body().toString());
-		Integer price = json.getInt("price");
+		Double price = json.getDouble("price");
 		return price;
 	}
 

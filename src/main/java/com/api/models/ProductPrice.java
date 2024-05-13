@@ -3,13 +3,13 @@ package com.api.models;
 public class ProductPrice {
 	
 	private String productId;
-	private Integer price;
+	private Double price;
 
 	public ProductPrice() {
 
 	}
 
-	public ProductPrice(String productId, Integer price) {
+	public ProductPrice(String productId, Double price) {
 		this.productId = productId;
 		this.price = price;
 	}
@@ -22,11 +22,11 @@ public class ProductPrice {
 		this.productId = productId;
 	}
 
-	public Integer getPrice() {
+	public Double getPrice() {
 		return price;
 	}
 
-	public void setPrice(Integer price) {
+	public void setPrice(Double price) {
 		this.price = price;
 	}
 }

@@ -38,13 +38,13 @@ class ChallengeMeliApplicationTests {
 		
 		CouponProductsRequest request = new CouponProductsRequest();
 		
-		request.setAmount(42000);
-		request.setProducts(Arrays.asList("MLA1318742325","MLA781333870","MLA1733065530"));
+		request.setAmount(60760.00);
+		request.setProducts(Arrays.asList("MLA1733065530","MLA1151535835","MLA783225766","MLA923172637"));
 		
 		ResponseEntity<CouponProductsResponse> response = this.restTemplate.postForEntity("http://localhost:" + port + "/coupon/", request, CouponProductsResponse.class);
 		
-		assertEquals(41319, response.getBody().getTotalAmount());
-		assertEquals(Arrays.asList("MLA1318742325","MLA1733065530"), response.getBody().getProducts());
+		assertEquals(60759.02, response.getBody().getTotalAmount());
+		assertEquals(Arrays.asList("MLA1733065530","MLA783225766"), response.getBody().getProducts());
 	}
 	
 	@Test
@@ -53,7 +53,7 @@ class ChallengeMeliApplicationTests {
 		
 		CouponProductsRequest request = new CouponProductsRequest();
 		
-		request.setAmount(1000);
+		request.setAmount(1000.00);
 		request.setProducts(Arrays.asList("MLA1318742325","MLA781333870","MLA1733065530"));
 		
 		ResponseEntity<CouponProductsResponse> response = this.restTemplate.postForEntity("http://localhost:" + port + "/coupon/", request, CouponProductsResponse.class);
