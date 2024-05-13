@@ -1,0 +1,122 @@
+{
+    "openapi": "3.0.1",
+    "info": {
+      "title": "OpenAPI definition",
+      "version": "v0"
+    },
+    "servers": [
+      {
+        "url": "http://localhost:8080",
+        "description": "Generated server url"
+      }
+    ],
+    "paths": {
+      "/coupon/": {
+        "post": {
+          "tags": [
+            "coupon-controller"
+          ],
+          "operationId": "getCouponProducts",
+          "requestBody": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CouponProductsRequest"
+                }
+              }
+            },
+            "required": true
+          },
+          "responses": {
+            "200": {
+              "description": "OK",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/CouponProductsResponse"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/coupon/stats": {
+        "get": {
+          "tags": [
+            "coupon-controller"
+          ],
+          "operationId": "getStats",
+          "responses": {
+            "200": {
+              "description": "OK",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/FavItemsResponse"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "components": {
+      "schemas": {
+        "CouponProductsRequest": {
+          "type": "object",
+          "properties": {
+            "item_ids": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "amount": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        },
+        "CouponProductsResponse": {
+          "type": "object",
+          "properties": {
+            "item_ids": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "total": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        },
+        "FavItem": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string"
+            },
+            "quantity": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        },
+        "FavItemsResponse": {
+          "type": "object",
+          "properties": {
+            "favItems": {
+              "type": "array",
+              "items": {
+                "$ref": "#/components/schemas/FavItem"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
